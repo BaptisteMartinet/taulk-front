@@ -24,7 +24,17 @@ const Home: FunctionComponent = () => {
                 <h1>Interaction is everything</h1>
               </div>
               <div className={styles.scrollMouseContainer}>
-                <a href="#lobbies"><ScrollMouse /></a>
+                <a href="#learn"><ScrollMouse /></a>
+              </div>
+            </div>
+          </section>
+          <section id="learn">
+            <div className={styles.learnContainer}>
+              <div className={styles.textContainer}>
+                <h1>Taulk is the best messaging app as of today.<br/>We could be happy to welcome you!</h1>
+              </div>
+              <div className={styles.imageContainer}>
+                <img src="assets/undraw_online_messaging_re_qft3.svg" alt="todo" />
               </div>
             </div>
           </section>

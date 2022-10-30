@@ -43,7 +43,26 @@
     }
   }
 
+  .learnContainer {
+    margin: 4em 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .textContainer {
+      font-size: var(--fs-500);
+    }
+
+    .imageContainer {
+      flex-basis: 400px;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
   .lobbiesContainer {
-    margin: 2em 20%;
+    margin: 4em 20%;
   }
 }
