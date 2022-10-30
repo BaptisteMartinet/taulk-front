@@ -8,7 +8,7 @@ import App from './App';
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql', // TODO handle env var
   cache: new InMemoryCache(),
-  name: 'wesbite',
+  name: 'desktop',
   version: '1.0',
 });
 
