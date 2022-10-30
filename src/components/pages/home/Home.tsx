@@ -31,7 +31,7 @@ const Home: FunctionComponent = () => {
           <section id="learn">
             <div className={styles.learnContainer}>
               <div className={styles.textContainer}>
-                <h1>Taulk is the best messaging app as of today.<br/>We could be happy to welcome you!</h1>
+                <h1>Taulk is the best messaging app as of today.<br/>We would be happy to welcome you!</h1>
               </div>
               <div className={styles.imageContainer}>
                 <img src="assets/undraw_online_messaging_re_qft3.svg" alt="todo" />
@@ -40,7 +40,7 @@ const Home: FunctionComponent = () => {
           </section>
           <section id="lobbies">
             <div className={styles.lobbiesContainer}>
-              <h1>Lobbies</h1>
+              <h1>Open Lobbies</h1>
               <Lobbies />
             </div>
           </section>
