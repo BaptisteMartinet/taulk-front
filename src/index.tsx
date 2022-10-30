@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './i18n';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 
 const client = new ApolloClient({
@@ -14,8 +15,10 @@ const client = new ApolloClient({
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <ApolloProvider client={client}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <HelmetProvider>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </HelmetProvider>
   </ApolloProvider>,
 );
