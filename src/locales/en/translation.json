@@ -1,0 +1,15 @@
+{
+  "pages": {
+    "home": {
+      "title": "TAULK - Homepage",
+      "hero-overlay-title": "Interaction is everything",
+      "learn-title": "Taulk is the best messaging app as of today.\nWe would be happy to welcome you!",
+      "open-lobbies": "Open Lobbies",
+      "lobbies": {
+        "title-header": "Title",
+        "description-header": "Description",
+        "createdAt-header": "Creation date"
+      }
+    }
+  }
+}

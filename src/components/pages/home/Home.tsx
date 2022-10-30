@@ -1,14 +1,16 @@
 import React, { FunctionComponent } from 'react';
 import { Helmet } from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 import { Footer, Header, ScrollMouse } from 'components/common';
 import Lobbies from './lobbies';
 import styles from './Home.module.scss';
 
 const Home: FunctionComponent = () => {
+  const { t } = useTranslation();
   return (
     <>
       <Helmet>
-        <title>Taulk - Homepage</title>
+        <title>{t('pages.home.title')}</title>
       </Helmet>
       <Header />
       <main>
@@ -21,7 +23,7 @@ const Home: FunctionComponent = () => {
                 </video>
               </div>
               <div className={styles.heroOverlay}>
-                <h1>Interaction is everything</h1>
+                <h1>{t('pages.home.hero-overlay-title')}</h1>
               </div>
               <div className={styles.scrollMouseContainer}>
                 <a href="#learn"><ScrollMouse /></a>
@@ -31,7 +33,7 @@ const Home: FunctionComponent = () => {
           <section id="learn">
             <div className={styles.learnContainer}>
               <div className={styles.textContainer}>
-                <h1>Taulk is the best messaging app as of today.<br/>We would be happy to welcome you!</h1>
+                <h1>{t('pages.home.learn-title')}</h1>
               </div>
               <div className={styles.imageContainer}>
                 <img src="assets/undraw_online_messaging_re_qft3.svg" alt="todo" />
@@ -40,7 +42,7 @@ const Home: FunctionComponent = () => {
           </section>
           <section id="lobbies">
             <div className={styles.lobbiesContainer}>
-              <h1>Open Lobbies</h1>
+              <h1>{t('pages.home.open-lobbies')}</h1>
               <Lobbies />
             </div>
           </section>

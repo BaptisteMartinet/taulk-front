@@ -26,6 +26,10 @@
   }
 }
 
+#root {
+  white-space: pre-line; // (https://stackoverflow.com/a/54747308/13050826)
+}
+
 html,
 body {
   margin: 0;

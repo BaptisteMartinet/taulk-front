@@ -1,0 +1,15 @@
+{
+  "pages": {
+    "home": {
+      "title": "TAULK - Accueil",
+      "hero-overlay-title": "L'interaction est tout",
+      "learn-title": "Taulk est la meilleur application de communication en temps reel.\nNous serions ravi que vous nous rejoignez",
+      "open-lobbies": "Lobby ouverts",
+      "lobbies": {
+        "title-header": "Titre",
+        "description-header": "Description",
+        "createdAt-header": "Créé le"
+      }
+    }
+  }
+}
