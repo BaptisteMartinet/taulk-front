@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { Footer, Header } from 'components/common';
 import './Home.scss';
 
 const Home: FunctionComponent = () => {
@@ -9,8 +10,10 @@ const Home: FunctionComponent = () => {
       <Helmet>
         <title>Taulk - Homepage</title>
       </Helmet>
-      <h1>ici c la homepage</h1>
-      <Link to={'dashboard'}>Go to le dashboard</Link>
+      <Header/>
+      <main></main>
+      <Footer/>
+      { /* <Link to={'dashboard'}>Go to le dashboard</Link> */ }
     </>
   );
 };
