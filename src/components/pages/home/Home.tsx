@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { Helmet } from 'react-helmet';
 import { Footer, Header, ScrollMouse } from 'components/common';
+import Lobbies from './lobbies';
 import styles from './Home.module.scss';
-import { Link } from 'react-router-dom';
 
 const Home: FunctionComponent = () => {
   return (
@@ -24,8 +24,14 @@ const Home: FunctionComponent = () => {
                 <h1>Interaction is everything</h1>
               </div>
               <div className={styles.scrollMouseContainer}>
-                <Link to={'#lobbies'}><ScrollMouse /></Link>
+                <a href="#lobbies"><ScrollMouse /></a>
               </div>
+            </div>
+          </section>
+          <section id="lobbies">
+            <div className={styles.lobbiesContainer}>
+              <h1>Lobbies</h1>
+              <Lobbies />
             </div>
           </section>
         </div>

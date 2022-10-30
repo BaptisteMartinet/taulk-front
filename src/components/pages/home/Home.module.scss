@@ -1,6 +1,5 @@
 .container {
   width: 100%;
-  background-color: black;
 
   .heroContainer {
     position: relative;
@@ -42,5 +41,9 @@
       left: 50%;
       transform: translateX(-50%);
     }
+  }
+
+  .lobbiesContainer {
+    margin: 2em 20%;
   }
 }
