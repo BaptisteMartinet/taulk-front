@@ -30,7 +30,7 @@ const Header: FunctionComponent = () => {
         <nav aria-label="Menu">
           <ul>
             <li><a href="/#">{t('common.header.nav.home')}</a></li>
-            <li><a href="/#learn">{t('common.header.nav.about')}</a></li>
+            <li><a href="/#about">{t('common.header.nav.about')}</a></li>
             <li><a href="/#lobbies">{t('common.header.nav.lobbies')}</a></li>
             <li><a href="https://github.com/BaptisteMartinet" target="_blanck">Github</a></li>
           </ul>

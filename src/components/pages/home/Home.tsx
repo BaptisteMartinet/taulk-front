@@ -26,11 +26,11 @@ const Home: FunctionComponent = () => {
                 <h1>{t('pages.home.hero-overlay-title')}</h1>
               </div>
               <div className={styles.scrollMouseContainer}>
-                <a href="#learn"><ScrollMouse /></a>
+                <a href="#about"><ScrollMouse /></a>
               </div>
             </div>
           </section>
-          <section id="learn">
+          <section id="about">
             <div className={styles.aboutContainer}>
               <div className={styles.textContainer}>
                 <h1>{t('pages.home.about-title')}</h1>
