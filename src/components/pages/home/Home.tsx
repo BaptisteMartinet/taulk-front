@@ -17,7 +17,7 @@ const Home: FunctionComponent = () => {
             <div className={styles.heroContainer}>
               <div className={styles.videoContainer}>
                 <video autoPlay muted loop>
-                  <source src="assets/videos/hero-video2.mp4" type="video/mp4" />
+                  <source src="assets/videos/hero-video1.mp4" type="video/mp4" />
                 </video>
               </div>
               <div className={styles.heroOverlay}>
