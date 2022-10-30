@@ -1,0 +1,46 @@
+.container {
+  width: 100%;
+  background-color: black;
+
+  .heroContainer {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+
+    .videoContainer {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .heroOverlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      h1 {
+        color: white;
+        font-size: var(--fs-xl);
+        font-weight: lighter;
+      }
+    }
+
+    .scrollMouseContainer {
+      position: absolute;
+      bottom: 4em;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
