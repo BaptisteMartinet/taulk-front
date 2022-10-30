@@ -2,6 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import { LobbyRestricted } from 'api/types';
 
@@ -24,7 +26,11 @@ const Lobbies: FunctionComponent = () => {
   const [pageSize, setPageSize] = React.useState(5);
   const { loading, error, data } = useQuery(GetLobbies);
   if (loading || error != null) {
-    return null; // TODO display loading spinner
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress />
+      </Box>
+    );
   }
   const lobbies: LobbyRestricted[] = data.public.lobbies;
   const rows: GridRowsProp = lobbies.map((lobby) => {
