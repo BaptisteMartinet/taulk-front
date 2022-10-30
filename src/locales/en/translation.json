@@ -11,5 +11,15 @@
         "createdAt-header": "Creation date"
       }
     }
+  },
+  "common": {
+    "header": {
+      "nav": {
+        "home": "Home",
+        "about": "About",
+        "lobbies": "Lobbies"
+      },
+      "openApp": "Open App"
+    }
   }
 }
