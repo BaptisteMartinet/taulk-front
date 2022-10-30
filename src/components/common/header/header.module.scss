@@ -33,6 +33,10 @@
     li:hover {
       text-decoration: underline;
     }
+
+    @media (max-width: 960px) {
+      display: none;
+    }
   }
 
   .openBtn {
@@ -40,5 +44,10 @@
     border-radius: 32px;
     background-color: white;
     color: black;
+    transition: .2s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }
