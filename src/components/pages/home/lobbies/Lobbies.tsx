@@ -25,6 +25,7 @@ const columns: GridColDef[] = [
 ];
 
 const Lobbies: FunctionComponent = () => {
+  const [pageSize, setPageSize] = React.useState(5);
   const { loading, error, data } = useQuery(GetLobbies);
   if (loading || error != null) {
     return null; // TODO display loading spinner
@@ -39,7 +40,8 @@ const Lobbies: FunctionComponent = () => {
       rows={rows}
       columns={columns}
       autoHeight
-      pageSize={5}
+      pageSize={pageSize}
+      onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
       rowsPerPageOptions={[5, 10]}
       isRowSelectable={() => false}
     />
