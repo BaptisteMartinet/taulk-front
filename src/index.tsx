@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './i18n';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { HelmetProvider } from 'react-helmet-async';
+import { SnackbarContextProvider } from 'components/common/app/snackbar/SnackbarContext';
+import { Snackbar } from 'components/common/app';
 import App from './App';
 
 const client = new ApolloClient({
@@ -16,9 +18,12 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <ApolloProvider client={client}>
     <HelmetProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <SnackbarContextProvider>
+        <React.StrictMode>
+          <App />
+          <Snackbar />
+        </React.StrictMode>
+      </SnackbarContextProvider>
     </HelmetProvider>
   </ApolloProvider>,
 );
