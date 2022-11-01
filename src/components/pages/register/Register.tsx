@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
+import { gql, useMutation } from '@apollo/client';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
@@ -53,6 +54,15 @@ const LoginLink = styled(Link)({
   marginBlock: '1em',
 });
 
+const RegisterMutation = gql`
+mutation Register($username: String!, $email: String!, $password: String!) {
+  public {
+    account {
+      register(username: $username, email: $email, password: $password)
+    }
+  }
+}`;
+
 const validationSchema = yup.object({
   username: yup
     .string()
@@ -69,6 +79,12 @@ const validationSchema = yup.object({
 });
 
 const Register: FunctionComponent = () => {
+  const navigate = useNavigate();
+  const [register] = useMutation(RegisterMutation, {
+    onCompleted: () => {
+      navigate('/login');
+    },
+  });
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -77,7 +93,8 @@ const Register: FunctionComponent = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      const { username, email, password } = values;
+      register({ variables: { username, email, password } }).catch(() => { });
     },
   });
   return (
