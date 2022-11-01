@@ -1,0 +1,11 @@
+query Lobbies {
+  public {
+    lobbies {
+      id
+      title
+      description
+      createdAt
+      updatedAt
+    }
+  }
+}

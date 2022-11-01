@@ -1,25 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import { loader } from 'graphql.macro';
 import { Link } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import { LobbyRestricted } from 'core/api/types';
 
-const GetLobbies = gql`
-query Lobbies {
-  public {
-    lobbies {
-      id
-      title
-      description
-      createdAt
-      updatedAt
-    }
-  }
-}
-`;
+const GetLobbies = loader('./GetLobbies.gql');
 
 const Lobbies: FunctionComponent = () => {
   const { t } = useTranslation();
@@ -42,7 +31,7 @@ const Lobbies: FunctionComponent = () => {
       field: 'title',
       headerName: t('pages.home.lobbies.title-header'),
       flex: 1,
-      renderCell: (params) => (<Link to={'/login'} style={{ color: 'blue' }}>{params.value}</Link>),
+      renderCell: (params) => (<Link to={'/login'} style={{ color: 'blue' }}>{params.value}</Link>), // TODO link
     },
     { field: 'description', headerName: t('pages.home.lobbies.description-header'), flex: 1 },
     { field: 'createdAt', headerName: t('pages.home.lobbies.createdAt-header'), flex: 0.5 },

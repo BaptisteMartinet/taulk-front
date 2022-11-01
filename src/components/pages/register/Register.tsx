@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { loader } from 'graphql.macro';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
@@ -55,14 +56,7 @@ const LoginLink = styled(Link)({
   marginBlock: '1em',
 });
 
-const RegisterMutation = gql`
-mutation Register($username: String!, $email: String!, $password: String!) {
-  public {
-    account {
-      register(username: $username, email: $email, password: $password)
-    }
-  }
-}`;
+const RegisterMutation = loader('./RegisterMutation.gql');
 
 const validationSchema = yup.object({
   username: yup
