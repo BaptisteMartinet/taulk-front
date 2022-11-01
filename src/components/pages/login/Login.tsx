@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { gql, useMutation } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
@@ -75,6 +76,7 @@ mutation Login($email: String!, $password: String!) {
 `;
 
 const Login: FunctionComponent = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const snackbarCtx = React.useContext(SnackbarContext);
   const [login] = useMutation(LoginMutation, {
@@ -98,12 +100,12 @@ const Login: FunctionComponent = () => {
   return (
     <>
       <Helmet>
-        <title>TAULK - Login</title>
+        <title>{t('pages.login.title')}</title>
       </Helmet>
       <Container>
         <FormContainer>
           <Form onSubmit={formik.handleSubmit} onChange={formik.handleChange}>
-            <FormTitle>Welcome back!</FormTitle>
+            <FormTitle>{t('pages.login.form-title')}</FormTitle>
             <StyledTextField
               label="Email"
               variant="outlined"
@@ -117,9 +119,9 @@ const Login: FunctionComponent = () => {
               type="password"
               value={formik.values.password}
             />
-            <StyledButton type="submit" variant="contained">Log in</StyledButton>
+            <StyledButton type="submit" variant="contained">{t('pages.login.form-submit')}</StyledButton>
           </Form>
-          <RegisterLink to="/register">I don t have an account</RegisterLink>
+          <RegisterLink to="/register">{t('pages.login.register-link')}</RegisterLink>
         </FormContainer>
       </Container>
     </>

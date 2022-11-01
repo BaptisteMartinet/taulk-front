@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { gql, useMutation } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
@@ -79,6 +80,7 @@ const validationSchema = yup.object({
 });
 
 const Register: FunctionComponent = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [register] = useMutation(RegisterMutation, {
     onCompleted: () => {
@@ -100,12 +102,12 @@ const Register: FunctionComponent = () => {
   return (
     <>
       <Helmet>
-        <title>TAULK - Register</title>
+        <title>{t('pages.register.title')}</title>
       </Helmet>
       <Container>
         <FormContainer>
           <Form onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
-            <FormTitle>Create an account</FormTitle>
+            <FormTitle>{t('pages.register.form-title')}</FormTitle>
             <StyledTextField
               name="username"
               label="Username"
@@ -131,9 +133,9 @@ const Register: FunctionComponent = () => {
               error={formik.touched.password != null && Boolean(formik.errors.password)}
               helperText={formik.touched.password != null && formik.errors.password}
             />
-            <StyledButton type="submit" variant="contained">Register</StyledButton>
+            <StyledButton type="submit" variant="contained">{t('pages.register.form-submit')}</StyledButton>
           </Form>
-          <LoginLink to="/login">Already have an account?</LoginLink>
+          <LoginLink to="/login">{t('pages.register.login-link')}</LoginLink>
         </FormContainer>
       </Container>
     </>

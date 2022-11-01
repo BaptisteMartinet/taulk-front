@@ -10,6 +10,18 @@
         "description-header": "Description",
         "createdAt-header": "Créé le"
       }
+    },
+    "login": {
+      "title": "TAULK - Se connecter",
+      "form-title": "Rebonjour !",
+      "form-submit": "Se connecter",
+      "register-link": "Je n'ai pas de compte"
+    },
+    "register": {
+      "title": "TAULK - S'enregistrer",
+      "form-title": "Créer un compte",
+      "form-submit": "Créer un compte",
+      "login-link": "J'ai déja un compte"
     }
   },
   "common": {
