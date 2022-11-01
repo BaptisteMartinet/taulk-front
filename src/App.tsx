@@ -1,6 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Home, Login, Register } from 'components/pages';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {
+  Home,
+  Login,
+  Register,
+  NotFound,
+} from 'components/pages';
 import './App.scss';
 
 const App: FunctionComponent = () => {
@@ -10,7 +15,7 @@ const App: FunctionComponent = () => {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='*' element={<Navigate to="/" />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter >
   );

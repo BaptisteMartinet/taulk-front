@@ -22,6 +22,11 @@
       "form-title": "Create an account",
       "form-submit": "Sign up",
       "login-link": "Already have an account?"
+    },
+    "not-found": {
+      "title": "TAULK - Page Not Found",
+      "error-title": "404 - Page not found",
+      "go-back-link": "⬅️ Go back to homepage"
     }
   },
   "common": {
