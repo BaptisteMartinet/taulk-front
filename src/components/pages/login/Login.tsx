@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
+import { LoginResponse } from 'api/types';
 import SnackbarContext from 'components/common/app/snackbar/SnackbarContext';
 
 const Container = styled('main')({
@@ -59,12 +60,14 @@ mutation Login($email: String!, $password: String!) {
   public {
     account {
       login(email: $email, password: $password) {
-        id
-        username
-        email
         token
-        createdAt
-        updatedAt
+        user {
+          id
+          username
+          email
+          createdAt
+          updatedAt
+        }
       }
     }
   }
@@ -75,7 +78,11 @@ const Login: FunctionComponent = () => {
   const navigate = useNavigate();
   const snackbarCtx = React.useContext(SnackbarContext);
   const [login] = useMutation(LOGIN, {
-    onCompleted: () => { navigate('/dashboard'); },
+    onCompleted: (data) => {
+      const res: LoginResponse = data.public.account.login;
+      localStorage.setItem('token', res.token);
+      navigate('/dashboard');
+    },
     onError: (error) => { snackbarCtx.showSnack({ text: error.message, severity: 'error' }); },
   });
   const formik = useFormik({

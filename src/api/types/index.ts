@@ -8,7 +8,6 @@ export interface User {
   email: string
   createdAt: Date
   updatedAt: Date
-  // token (to be removed)
 }
 
 export interface Message {
@@ -48,4 +47,11 @@ export interface Lobby {
   users: UserRestricted[]
   createdAt: Date
   updatedAt: Date
+}
+
+// Responses
+
+export interface LoginResponse {
+  token: string
+  user: User
 }
