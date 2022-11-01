@@ -36,7 +36,8 @@
         "about": "About",
         "lobbies": "Lobbies"
       },
-      "openApp": "Open App"
+      "openApp": "Open App",
+      "login": "Login"
     }
   }
 }

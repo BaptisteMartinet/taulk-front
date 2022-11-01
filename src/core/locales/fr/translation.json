@@ -36,7 +36,8 @@
         "about": "A propos",
         "lobbies": "Serveurs"
       },
-      "openApp": "Ouvrir l'application"
+      "openApp": "Ouvrir l'application",
+      "login": "Se connecter"
     }
   }
 }

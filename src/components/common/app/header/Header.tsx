@@ -1,12 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { AuthContext } from 'core/contexts';
 import styles from './Header.module.scss';
 
 const MinScrollValue = 5;
 
 const Header: FunctionComponent = () => {
   const { t } = useTranslation();
+  const authCtx = React.useContext(AuthContext);
   const [top, setTop] = React.useState(true);
   React.useEffect(() => {
     document.addEventListener('scroll', () => {
@@ -35,7 +37,10 @@ const Header: FunctionComponent = () => {
             <li><a href="https://github.com/BaptisteMartinet" target="_blanck">Github</a></li>
           </ul>
         </nav>
-        <Link to="/login" className={styles.openBtn}>{t('common.header.openApp')}</Link>
+        {authCtx.user != null
+          ? <Link to="/dashboard" className={styles.openBtn}>{t('common.header.openApp')}</Link>
+          : <Link to="/login" className={styles.openBtn}>{t('common.header.login')}</Link>
+        }
       </div>
     </header >
   );
