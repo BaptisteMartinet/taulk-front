@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
-import { LobbyRestricted } from 'api/types';
+import { LobbyRestricted } from 'core/api/types';
 
 const GetLobbies = gql`
 query Lobbies {

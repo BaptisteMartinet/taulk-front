@@ -6,8 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import { LoginResponse } from 'api/types';
-import SnackbarContext from 'components/common/app/snackbar/SnackbarContext';
+import { LoginResponse } from 'core/api/types';
+import { AuthContext, SnackbarContext } from 'core/contexts';
 
 const Container = styled('main')({
   width: '100%',
@@ -78,11 +78,13 @@ mutation Login($email: String!, $password: String!) {
 const Login: FunctionComponent = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const authCtx = React.useContext(AuthContext);
   const snackbarCtx = React.useContext(SnackbarContext);
   const [login] = useMutation(LoginMutation, {
     onCompleted: (data) => {
       const res: LoginResponse = data.public.account.login;
       localStorage.setItem('token', res.token);
+      authCtx.login(res.user);
       navigate('/dashboard');
     },
     onError: (error) => { snackbarCtx.showSnack({ text: error.message, severity: 'error' }); },

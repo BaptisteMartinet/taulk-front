@@ -4,7 +4,8 @@ import './i18n';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { HelmetProvider } from 'react-helmet-async';
-import { SnackbarContextProvider } from 'components/common/app/snackbar/SnackbarContext';
+import { SnackbarContextProvider } from 'core/contexts/SnackbarContext';
+import { AuthContextProvider } from 'core/contexts/AuthContext';
 import { Snackbar } from 'components/common/app';
 import App from './App';
 
@@ -35,12 +36,14 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <ApolloProvider client={client}>
     <HelmetProvider>
-      <SnackbarContextProvider>
-        <React.StrictMode>
-          <App />
-          <Snackbar />
-        </React.StrictMode>
-      </SnackbarContextProvider>
+      <AuthContextProvider>
+        <SnackbarContextProvider>
+          <React.StrictMode>
+            <App />
+            <Snackbar />
+          </React.StrictMode>
+        </SnackbarContextProvider>
+      </AuthContextProvider>
     </HelmetProvider>
   </ApolloProvider>,
 );

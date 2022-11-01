@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Snackbar as SnackbarMUI, Alert } from '@mui/material';
 import type { SnackbarCloseReason } from '@mui/material';
-import SnackbarContext from './SnackbarContext';
+import { SnackbarContext } from 'core/contexts';
 
 const AutoHideDuration = 6000;
 
