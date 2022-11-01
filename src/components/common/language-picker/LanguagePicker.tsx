@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import i18n, { Language } from 'i18n';
+import i18n, { Language } from 'core/i18n';
 
 const LanguagePicker: FunctionComponent = () => {
   const [lang, setLang] = React.useState(i18next.language as Language);
