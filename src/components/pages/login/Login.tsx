@@ -55,7 +55,7 @@ const RegisterLink = styled(Link)({
   marginBlock: '1em',
 });
 
-const LOGIN = gql`
+const LoginMutation = gql`
 mutation Login($email: String!, $password: String!) {
   public {
     account {
@@ -77,7 +77,7 @@ mutation Login($email: String!, $password: String!) {
 const Login: FunctionComponent = () => {
   const navigate = useNavigate();
   const snackbarCtx = React.useContext(SnackbarContext);
-  const [login] = useMutation(LOGIN, {
+  const [login] = useMutation(LoginMutation, {
     onCompleted: (data) => {
       const res: LoginResponse = data.public.account.login;
       localStorage.setItem('token', res.token);
