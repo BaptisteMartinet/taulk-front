@@ -11,7 +11,7 @@ const Container = styled('div')({
   width: '80px',
   height: '100%',
   padding: '1em .5em',
-  backgroundColor: 'var(--space-cadet)',
+  backgroundColor: 'var(--discord1)',
   overflow: 'hidden',
   overflowY: 'scroll',
   '&::-webkit-scrollbar': {
@@ -25,7 +25,7 @@ const Separator = styled('div')({
   width: '50%',
   height: '2px',
   borderRadius: '1px',
-  backgroundColor: 'var(--heliotrope-gray)',
+  backgroundColor: 'var(--discord3)',
 });
 
 export interface LobbiesBarProps {
@@ -43,7 +43,7 @@ const LobbiesBar: FunctionComponent<LobbiesBarProps> = (props) => {
           <LobbyAvatar key={lobby.id} lobby={lobby} />
         ))}
         <IconButton onClick={() => { console.info('Create lobby dialog'); }}>
-          <Avatar sx={{ width: '48px', height: '48px', bgcolor: 'var(--heliotrope-gray)' }}>
+          <Avatar sx={{ width: '48px', height: '48px', bgcolor: 'var(--discord3)', color: 'green' }}>
             <AddIcon />
           </Avatar>
         </IconButton>
