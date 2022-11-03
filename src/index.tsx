@@ -6,7 +6,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { SnackbarContextProvider } from 'core/contexts/SnackbarContext';
 import { AuthContextProvider } from 'core/contexts/AuthContext';
 import { Snackbar } from 'components/common/app';
-import App from './App';
+import App from 'components/App';
 import client from './apollo';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
