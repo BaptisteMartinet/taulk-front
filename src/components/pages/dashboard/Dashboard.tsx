@@ -4,6 +4,7 @@ import { styled } from '@mui/material';
 import { Lobby } from 'core/api/types';
 import { GetMyLobbies } from 'core/api/queries';
 import LobbiesBar from './lobbies-bar/LobbiesBar';
+import ChannelsBar from './channels-bar';
 
 const Container = styled('main')({
   width: '100%',
@@ -18,6 +19,7 @@ const Dashboard: FunctionComponent = () => {
   return (
     <Container>
       <LobbiesBar lobbies={lobbies} />
+      <ChannelsBar channels={[]} />
     </Container>
   );
 };
