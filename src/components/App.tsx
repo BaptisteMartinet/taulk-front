@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
+  NotFound,
   Home,
   Login,
   Register,
-  NotFound,
 } from 'components/pages';
 import './App.scss';
 
