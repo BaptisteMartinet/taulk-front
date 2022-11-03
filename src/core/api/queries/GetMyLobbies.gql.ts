@@ -11,6 +11,7 @@ query GetMyLobbies {
       title
       description
       channels {
+        id
         title
         owner {
           id

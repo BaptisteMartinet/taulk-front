@@ -18,7 +18,30 @@ const authLink = setContext((_, { headers }) => {
 
 export default new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query_Public: {
+        merge(existing, incoming, { mergeObjects }) {
+          return mergeObjects(existing, incoming);
+        },
+      },
+      Query_Authenticated: {
+        merge(existing, incoming, { mergeObjects }) {
+          return mergeObjects(existing, incoming);
+        },
+      },
+      Mutation_Public: {
+        merge(existing, incoming, { mergeObjects }) {
+          return mergeObjects(existing, incoming);
+        },
+      },
+      Mutation_Authenticated: {
+        merge(existing, incoming, { mergeObjects }) {
+          return mergeObjects(existing, incoming);
+        },
+      },
+    },
+  }),
   name: 'desktop',
   version: '1.0',
 });

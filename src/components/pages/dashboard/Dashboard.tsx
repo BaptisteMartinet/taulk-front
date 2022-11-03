@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { useQuery } from '@apollo/client';
 import { styled } from '@mui/material';
-import { Lobby } from 'core/api/types';
-import { GetMyLobbies } from 'core/api/queries';
-import LobbiesBar from './lobbies-bar/LobbiesBar';
+import { DashboardContextProvider } from './DashboardContext';
+import LobbiesBar from './lobbies-bar';
 import ChannelsBar from './channels-bar';
 
 const Container = styled('main')({
@@ -13,15 +11,18 @@ const Container = styled('main')({
 });
 
 const Dashboard: FunctionComponent = () => {
-  const { data, loading, error } = useQuery(GetMyLobbies);
-  if (loading || error != null) return null;
-  const lobbies: Lobby[] = data.authenticated.myLobbies;
   return (
     <Container>
-      <LobbiesBar lobbies={lobbies} />
-      <ChannelsBar channels={[]} />
+      <LobbiesBar />
+      <ChannelsBar />
     </Container>
   );
 };
 
-export default Dashboard;
+const DashboardWrapper: FunctionComponent = () => (
+  <DashboardContextProvider>
+    <Dashboard />
+  </DashboardContextProvider>
+);
+
+export default DashboardWrapper;

@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { styled } from '@mui/material/styles';
 import MuiStack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { Channel } from 'core/api/types';
 import { Scrollable } from 'components/common';
+import DashboardContext from '../DashboardContext';
 
 const Container = styled('div')({
   position: 'relative',
@@ -33,11 +33,8 @@ const Stack = styled(MuiStack)({
   padding: '1em',
 });
 
-export interface ChannelsBarProps {
-  channels: Channel[]
-}
-
-const ChannelsBar: FunctionComponent<ChannelsBarProps> = ({ channels }) => {
+const ChannelsBar: FunctionComponent = () => {
+  const ctx = React.useContext(DashboardContext);
   return (
     <Container>
       <LobbyTitleContainer>
@@ -45,9 +42,18 @@ const ChannelsBar: FunctionComponent<ChannelsBarProps> = ({ channels }) => {
       </LobbyTitleContainer>
       <Scrollable>
         <Stack direction="column" spacing={1}>
-          {channels.map((channel) => (
-            <Button key={channel.id} sx={{ color: 'rgba(255, 255, 255, 0.6)' }}>{channel.title}</Button>
-          ))}
+          {ctx.currentLobby?.channels.map((channel) => {
+            const color = channel.id === ctx.currentChannel?.id ? 'white' : 'rgba(255, 255, 255, 0.6)';
+            return (
+              <Button
+                key={channel.id}
+                sx={{ color }}
+                onClick={() => { ctx.handleCurrentChannel(channel.id); }}
+              >
+                {channel.title}
+              </Button>
+            );
+          })}
         </Stack>
       </Scrollable>
     </Container>
