@@ -1,3 +1,6 @@
+import { gql } from '@apollo/client';
+
+export default gql`
 mutation Login($email: String!, $password: String!) {
   public {
     account {
@@ -14,3 +17,4 @@ mutation Login($email: String!, $password: String!) {
     }
   }
 }
+`;

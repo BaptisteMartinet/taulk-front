@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { loader } from 'graphql.macro';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
@@ -13,8 +12,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import PasswordIcon from '@mui/icons-material/Password';
 import { useFormik } from 'formik';
-import { LoginResponse } from 'core/api/types';
 import { AuthContext, SnackbarContext } from 'core/contexts';
+import { LoginResponse } from 'core/api/types';
+import { LoginMutation } from 'core/api/mutations';
 
 const Container = styled('main')({
   width: '100%',
@@ -63,8 +63,6 @@ const RegisterLink = styled(Link)({
   color: 'blue',
   marginBlock: '1em',
 });
-
-const LoginMutation = loader('./LoginMutation.gql');
 
 const Login: FunctionComponent = () => {
   const { t } = useTranslation();

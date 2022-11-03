@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { useMutation } from '@apollo/client';
-import { loader } from 'graphql.macro';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,6 +8,7 @@ import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { SnackbarContext } from 'core/contexts';
+import { RegisterMutation } from 'core/api/mutations';
 
 const Container = styled('main')({
   width: '100%',
@@ -57,8 +57,6 @@ const LoginLink = styled(Link)({
   color: 'blue',
   marginBlock: '1em',
 });
-
-const RegisterMutation = loader('./RegisterMutation.gql');
 
 const validationSchema = yup.object({
   username: yup

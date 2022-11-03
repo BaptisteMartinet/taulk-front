@@ -1,14 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
-import { loader } from 'graphql.macro';
 import { Link } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import { LobbyRestricted } from 'core/api/types';
-
-const GetLobbies = loader('./GetLobbies.gql');
+import { GetLobbies } from 'core/api/queries';
 
 const Lobbies: FunctionComponent = () => {
   const { t } = useTranslation();
