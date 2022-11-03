@@ -15,10 +15,8 @@ root.render(
     <HelmetProvider>
       <AuthContextProvider>
         <SnackbarContextProvider>
-          <React.StrictMode>
-            <App />
-            <Snackbar />
-          </React.StrictMode>
+          <App />
+          <Snackbar />
         </SnackbarContextProvider>
       </AuthContextProvider>
     </HelmetProvider>

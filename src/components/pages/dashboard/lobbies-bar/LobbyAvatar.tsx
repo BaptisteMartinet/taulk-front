@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
+import { observer } from 'mobx-react-lite';
 import MuiAvatar from '@mui/material/Avatar';
 import Badge from '@mui/material/Badge';
 import { IconButton, styled } from '@mui/material';
 import { generateAcronym } from 'lib/string';
+import store from 'store/pages/dashboard';
 import { Lobby } from 'core/api/types';
-import DashboardContext from '../DashboardContext';
 
 const Avatar = styled(MuiAvatar)({
   width: '48px',
@@ -20,11 +21,10 @@ export interface LobbyAvatarProps {
 }
 
 const LobbyAvatar: FunctionComponent<LobbyAvatarProps> = ({ lobby }) => {
-  const ctx = React.useContext(DashboardContext);
   const lobbyAcronym = generateAcronym(lobby.title);
-  const bgcolor = lobby.id === ctx.currentLobby?.id ? 'blue !important' : 'var(--discord3)';
+  const bgcolor = lobby.id === store.currentLobby?.id ? 'blue !important' : 'var(--discord3)';
   return (
-    <IconButton onClick={() => { ctx.handleCurrentLobby(lobby.id); }}>
+    <IconButton onClick={() => { store.setCurrentLobby(lobby.id); }}>
       <Badge badgeContent={0} color="primary" overlap="circular">
         <Avatar sx={{ bgcolor }}>{lobbyAcronym}</Avatar>
       </Badge>
@@ -32,4 +32,4 @@ const LobbyAvatar: FunctionComponent<LobbyAvatarProps> = ({ lobby }) => {
   );
 };
 
-export default LobbyAvatar;
+export default observer(LobbyAvatar);

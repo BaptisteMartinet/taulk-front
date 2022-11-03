@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
+import { observer } from 'mobx-react-lite';
 import { styled } from '@mui/material/styles';
 import MuiStack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import store from 'store/pages/dashboard';
 import LobbyAvatar from './LobbyAvatar';
 import { Scrollable } from 'components/common';
-import DashboardContext from '../DashboardContext';
 
 const Container = styled('div')({
   width: '80px',
@@ -23,14 +24,13 @@ const Separator = styled('div')({
 });
 
 const LobbiesBar: FunctionComponent = () => {
-  const ctx = React.useContext(DashboardContext);
   return (
     <Container>
       <Scrollable>
         <MuiStack direction="column" alignItems="center" spacing={1}>
           <img src="/assets/logos/logo_small_white.png" alt="Logo" style={{ width: '75%' }} />
           <Separator />
-          {ctx.lobbies.map((lobby) => (
+          {store.lobbies.map((lobby) => (
             <LobbyAvatar key={lobby.id} lobby={lobby}/>
           ))}
           <IconButton onClick={() => { console.info('Create lobby dialog'); }}>
@@ -44,4 +44,4 @@ const LobbiesBar: FunctionComponent = () => {
   );
 };
 
-export default LobbiesBar;
+export default observer(LobbiesBar);

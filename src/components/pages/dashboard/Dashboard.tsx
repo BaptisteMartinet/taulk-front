@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
+import { observer } from 'mobx-react-lite';
 import { styled } from '@mui/material';
-import { DashboardContextProvider } from './DashboardContext';
+import store from 'store/pages/dashboard';
 import LobbiesBar from './lobbies-bar';
 import ChannelsBar from './channels-bar';
 
@@ -11,6 +12,9 @@ const Container = styled('main')({
 });
 
 const Dashboard: FunctionComponent = () => {
+  React.useEffect(() => {
+    store.init();
+  }, []);
   return (
     <Container>
       <LobbiesBar />
@@ -19,10 +23,4 @@ const Dashboard: FunctionComponent = () => {
   );
 };
 
-const DashboardWrapper: FunctionComponent = () => (
-  <DashboardContextProvider>
-    <Dashboard />
-  </DashboardContextProvider>
-);
-
-export default DashboardWrapper;
+export default observer(Dashboard);

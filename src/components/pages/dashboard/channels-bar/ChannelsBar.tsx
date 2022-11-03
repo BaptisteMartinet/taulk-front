@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
+import { observer } from 'mobx-react-lite';
 import { styled } from '@mui/material/styles';
 import MuiStack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import store from 'store/pages/dashboard';
 import { Scrollable } from 'components/common';
-import DashboardContext from '../DashboardContext';
 
 const Container = styled('div')({
   position: 'relative',
@@ -34,7 +35,6 @@ const Stack = styled(MuiStack)({
 });
 
 const ChannelsBar: FunctionComponent = () => {
-  const ctx = React.useContext(DashboardContext);
   return (
     <Container>
       <LobbyTitleContainer>
@@ -42,13 +42,13 @@ const ChannelsBar: FunctionComponent = () => {
       </LobbyTitleContainer>
       <Scrollable>
         <Stack direction="column" spacing={1}>
-          {ctx.currentLobby?.channels.map((channel) => {
-            const color = channel.id === ctx.currentChannel?.id ? 'white' : 'rgba(255, 255, 255, 0.6)';
+          {store.currentLobby?.channels.map((channel) => {
+            const color = channel.id === store.currentChannel?.id ? 'white' : 'rgba(255, 255, 255, 0.6)';
             return (
               <Button
                 key={channel.id}
                 sx={{ color }}
-                onClick={() => { ctx.handleCurrentChannel(channel.id); }}
+                onClick={() => { store.setCurrentChannel(channel.id); }}
               >
                 {channel.title}
               </Button>
@@ -60,4 +60,4 @@ const ChannelsBar: FunctionComponent = () => {
   );
 };
 
-export default ChannelsBar;
+export default observer(ChannelsBar);
