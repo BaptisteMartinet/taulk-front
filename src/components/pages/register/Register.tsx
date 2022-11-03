@@ -30,6 +30,7 @@ const Form = styled('form')({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
+  alignItems: 'center',
   textAlign: 'center',
 });
 
@@ -101,6 +102,7 @@ const Register: FunctionComponent = () => {
       <Container>
         <FormContainer>
           <Form onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
+            <img src="assets/logos/logo_black.png" alt="Logo" width={128} />
             <FormTitle>{t('pages.register.form-title')}</FormTitle>
             <StyledTextField
               name="username"

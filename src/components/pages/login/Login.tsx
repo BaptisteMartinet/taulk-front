@@ -37,6 +37,7 @@ const Form = styled('form')({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
+  alignItems: 'center',
   textAlign: 'center',
 });
 
@@ -97,6 +98,7 @@ const Login: FunctionComponent = () => {
       <Container>
         <FormContainer>
           <Form onSubmit={formik.handleSubmit} onChange={formik.handleChange}>
+            <img src="assets/logos/logo_black.png" alt="Logo" width={128} />
             <FormTitle>{t('pages.login.form-title')}</FormTitle>
             <TextField
               label="Email"
