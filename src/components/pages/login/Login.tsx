@@ -5,7 +5,13 @@ import { loader } from 'graphql.macro';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { Button, TextField } from '@mui/material';
+import {
+  Button as MuiButton,
+  TextField as MuiTextField,
+} from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import PasswordIcon from '@mui/icons-material/Password';
 import { useFormik } from 'formik';
 import { LoginResponse } from 'core/api/types';
 import { AuthContext, SnackbarContext } from 'core/contexts';
@@ -16,7 +22,7 @@ const Container = styled('main')({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#5865f2',
+  backgroundColor: 'var(--purple2)',
 });
 
 const FormContainer = styled('div')({
@@ -39,13 +45,13 @@ const FormTitle = styled('h1')({
   marginBlock: '1em',
 });
 
-const StyledTextField = styled(TextField)({
+const TextField = styled(MuiTextField)({
   width: '100%',
   marginBlock: '.5em',
   fontSize: 'var(--fs-400)',
 });
 
-const StyledButton = styled(Button)({
+const Button = styled(MuiButton)({
   width: '100%',
   marginBlock: '.5em',
   fontSize: 'var(--fs-400)',
@@ -92,20 +98,34 @@ const Login: FunctionComponent = () => {
         <FormContainer>
           <Form onSubmit={formik.handleSubmit} onChange={formik.handleChange}>
             <FormTitle>{t('pages.login.form-title')}</FormTitle>
-            <StyledTextField
+            <TextField
               label="Email"
               variant="outlined"
               name="email"
               value={formik.values.email}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <AlternateEmailIcon color="primary" />
+                  </InputAdornment>
+                ),
+              }}
             />
-            <StyledTextField
+            <TextField
               label="Password"
               variant="outlined"
               name="password"
               type="password"
               value={formik.values.password}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <PasswordIcon color="primary" />
+                  </InputAdornment>
+                ),
+              }}
             />
-            <StyledButton type="submit" variant="contained">{t('pages.login.form-submit')}</StyledButton>
+            <Button type="submit" variant="contained">{t('pages.login.form-submit')}</Button>
           </Form>
           <RegisterLink to="/register">{t('pages.login.register-link')}</RegisterLink>
         </FormContainer>

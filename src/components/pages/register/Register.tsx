@@ -15,7 +15,7 @@ const Container = styled('main')({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#5865f2',
+  backgroundColor: 'var(--purple2)',
 });
 
 const FormContainer = styled('div')({
