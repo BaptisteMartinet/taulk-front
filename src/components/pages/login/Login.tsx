@@ -71,7 +71,7 @@ const Login: FunctionComponent = () => {
   const navigate = useNavigate();
   const authCtx = React.useContext(AuthContext);
   const snackbarCtx = React.useContext(SnackbarContext);
-  const [login] = useMutation(LoginMutation, {
+  const [loginMutation] = useMutation(LoginMutation, {
     onCompleted: (data) => {
       const res: LoginResponse = data.public.account.login;
       localStorage.setItem('token', res.token);
@@ -87,7 +87,7 @@ const Login: FunctionComponent = () => {
     },
     onSubmit: (values) => {
       const { email, password } = values;
-      login({ variables: { email, password } }).catch(() => { });
+      loginMutation({ variables: { email, password } }).catch(() => { });
     },
   });
   return (

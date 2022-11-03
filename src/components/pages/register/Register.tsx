@@ -8,6 +8,7 @@ import styled from '@emotion/styled';
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { SnackbarContext } from 'core/contexts';
 
 const Container = styled('main')({
   width: '100%',
@@ -77,9 +78,14 @@ const validationSchema = yup.object({
 const Register: FunctionComponent = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [register] = useMutation(RegisterMutation, {
+  const snackbarCtx = React.useContext(SnackbarContext);
+  const [registerMutation] = useMutation(RegisterMutation, {
     onCompleted: () => {
+      snackbarCtx.showSnack({ text: 'Success' }); // TODO lang
       navigate('/login');
+    },
+    onError: (error) => {
+      snackbarCtx.showSnack({ text: error.message, severity: 'error' });
     },
   });
   const formik = useFormik({
@@ -91,7 +97,7 @@ const Register: FunctionComponent = () => {
     validationSchema,
     onSubmit: (values) => {
       const { username, email, password } = values;
-      register({ variables: { username, email, password } }).catch(() => { });
+      registerMutation({ variables: { username, email, password } }).catch(() => { });
     },
   });
   return (
