@@ -5,6 +5,7 @@ import {
   Home,
   Login,
   Register,
+  Dashboard,
 } from 'components/pages';
 import './App.scss';
 
@@ -15,6 +16,7 @@ const App: FunctionComponent = () => {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/dashboard' element={<Dashboard />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter >
