@@ -18,11 +18,13 @@ const Avatar = styled(MuiAvatar)({
 
 export interface LobbyAvatarProps {
   lobby: Lobby
+  isCurrentLobby: boolean
 }
 
-const LobbyAvatar: FunctionComponent<LobbyAvatarProps> = ({ lobby }) => {
+const LobbyAvatar: FunctionComponent<LobbyAvatarProps> = (props) => {
+  const { lobby, isCurrentLobby } = props;
   const lobbyAcronym = generateAcronym(lobby.title);
-  const bgcolor = lobby.id === store.currentLobby?.id ? 'blue !important' : 'var(--discord3)';
+  const bgcolor = isCurrentLobby ? 'blue !important' : 'var(--discord3)';
   return (
     <IconButton onClick={() => { store.setCurrentLobby(lobby.id); }}>
       <Badge badgeContent={0} color="primary" overlap="circular">

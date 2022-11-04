@@ -31,7 +31,7 @@ const LobbiesBar: FunctionComponent = () => {
           <img src="/assets/logos/logo_small_white.png" alt="Logo" style={{ width: '75%' }} />
           <Separator />
           {store.lobbies?.map((lobby) => (
-            <LobbyAvatar key={lobby.id} lobby={lobby}/>
+            <LobbyAvatar key={lobby.id} lobby={lobby} isCurrentLobby={lobby.id === store.currentLobby?.id}/>
           ))}
           <IconButton onClick={() => { console.info('Create lobby dialog'); }}>
             <Avatar sx={{ width: '48px', height: '48px', bgcolor: 'var(--discord3)', color: 'green' }}>
