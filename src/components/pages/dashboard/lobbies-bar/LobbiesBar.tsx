@@ -10,7 +10,7 @@ import LobbyAvatar from './LobbyAvatar';
 import { Scrollable } from 'components/common';
 
 const Container = styled('div')({
-  width: '80px',
+  flex: '0 0 80px',
   height: '100%',
   padding: '1em .5em',
   backgroundColor: 'var(--discord1)',
@@ -28,10 +28,12 @@ const LobbiesBar: FunctionComponent = () => {
     <Container>
       <Scrollable>
         <MuiStack direction="column" alignItems="center" spacing={1}>
-          <img src="/assets/logos/logo_small_white.png" alt="Logo" style={{ width: '75%' }} />
+          <IconButton href="/dashboard">
+            <img src="/assets/logos/logo_small_white.png" alt="Logo" style={{ width: '90%' }} />
+          </IconButton>
           <Separator />
           {store.lobbies?.map((lobby) => (
-            <LobbyAvatar key={lobby.id} lobby={lobby} isCurrentLobby={lobby.id === store.currentLobby?.id}/>
+            <LobbyAvatar key={lobby.id} lobby={lobby} isCurrentLobby={lobby.id === store.currentLobby?.id} />
           ))}
           <IconButton onClick={() => { console.info('Create lobby dialog'); }}>
             <Avatar sx={{ width: '48px', height: '48px', bgcolor: 'var(--discord3)', color: 'green' }}>

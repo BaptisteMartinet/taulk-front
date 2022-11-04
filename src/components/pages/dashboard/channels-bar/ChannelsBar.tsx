@@ -8,7 +8,7 @@ import { Scrollable } from 'components/common';
 
 const Container = styled('div')({
   position: 'relative',
-  width: '240px',
+  flex: '0 0 240px',
   height: '100%',
   backgroundColor: 'var(--discord2)',
 });
