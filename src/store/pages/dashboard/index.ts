@@ -5,7 +5,7 @@ import apolloClient from 'apollo';
 import { ApolloQueryResult } from '@apollo/client';
 
 class DashboardStore {
-  lobbies: Lobby[] = [];
+  lobbies: Lobby[] | null = null;
 
   currentLobby: Lobby | null = null;
 
@@ -23,7 +23,8 @@ class DashboardStore {
   }
 
   setCurrentLobby(id: string): void {
-    this.currentLobby = this.lobbies.find((lobby) => (lobby.id === id)) ?? null;
+    this.currentLobby = this.lobbies?.find((lobby) => (lobby.id === id)) ?? null;
+    this.currentChannel = this.currentLobby?.channels.at(0) ?? null;
   }
 
   setCurrentChannel(id: string): void {
@@ -33,6 +34,8 @@ class DashboardStore {
   * init(): Generator<Promise<ApolloQueryResult<any>>> {
     const res: any = yield apolloClient.query({ query: GetMyLobbies });
     this.lobbies = res.data.authenticated.myLobbies;
+    this.currentLobby = this.lobbies?.at(0) ?? null;
+    this.currentChannel = this.currentLobby?.channels.at(0) ?? null;
   }
 }
 

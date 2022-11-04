@@ -30,7 +30,7 @@ const LobbiesBar: FunctionComponent = () => {
         <MuiStack direction="column" alignItems="center" spacing={1}>
           <img src="/assets/logos/logo_small_white.png" alt="Logo" style={{ width: '75%' }} />
           <Separator />
-          {store.lobbies.map((lobby) => (
+          {store.lobbies?.map((lobby) => (
             <LobbyAvatar key={lobby.id} lobby={lobby}/>
           ))}
           <IconButton onClick={() => { console.info('Create lobby dialog'); }}>
