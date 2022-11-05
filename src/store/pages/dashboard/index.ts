@@ -1,8 +1,8 @@
+import apolloClient from 'apollo';
 import { observable, action, makeAutoObservable, flow } from 'mobx';
 import { Channel, Lobby } from 'core/api/types';
 import { GetMyLobbies } from 'core/api/queries';
-import apolloClient from 'apollo';
-import { ApolloQueryResult } from '@apollo/client';
+import { NewMesssage } from 'core/api/subscriptions';
 
 class DashboardStore {
   lobbies: Lobby[] | null = null;
@@ -16,10 +16,18 @@ class DashboardStore {
       lobbies: observable,
       currentLobby: observable,
       currentChannel: observable,
+      setLobbies: action,
       setCurrentLobby: action,
       setCurrentChannel: action,
       init: flow,
     });
+  }
+
+  setLobbies(_lobbies: Lobby[]): void {
+    this.lobbies = _lobbies;
+    if (this.lobbies.length > 0) {
+      this.setCurrentLobby(this.lobbies[0].id);
+    }
   }
 
   setCurrentLobby(id: string): void {
@@ -31,11 +39,13 @@ class DashboardStore {
     this.currentChannel = this.currentLobby?.channels.find((channel) => (channel.id === id)) ?? null;
   }
 
-  * init(): Generator<Promise<ApolloQueryResult<any>>> {
-    const res: any = yield apolloClient.query({ query: GetMyLobbies });
-    this.lobbies = res.data.authenticated.myLobbies;
-    this.currentLobby = this.lobbies?.at(0) ?? null;
-    this.currentChannel = this.currentLobby?.channels.at(0) ?? null;
+  async init(): Promise<void> {
+    const res: any = await apolloClient.query({ query: GetMyLobbies });
+    this.setLobbies(res.data.authenticated.myLobbies);
+    apolloClient.subscribe({ query: NewMesssage }).subscribe((data) => {
+      console.log(data);
+      // TODO add message in store
+    });
   }
 }
 

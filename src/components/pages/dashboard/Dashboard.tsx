@@ -14,7 +14,7 @@ const Container = styled('main')({
 
 const Dashboard: FunctionComponent = () => {
   React.useEffect(() => {
-    store.init();
+    store.init().catch(() => { });
   }, []);
   return (
     <Container>
