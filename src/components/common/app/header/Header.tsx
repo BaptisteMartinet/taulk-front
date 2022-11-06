@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { AuthContext } from 'core/contexts';
+import accountStore from 'store/app/account';
 import styles from './Header.module.scss';
 
 const MinScrollValue = 5;
 
 const Header: FunctionComponent = () => {
   const { t } = useTranslation();
-  const authCtx = React.useContext(AuthContext);
   const [top, setTop] = React.useState(true);
   React.useEffect(() => {
     document.addEventListener('scroll', () => {
@@ -36,7 +36,7 @@ const Header: FunctionComponent = () => {
             <li><a href="/#lobbies">{t('common.header.nav.lobbies')}</a></li>
           </ul>
         </nav>
-        {authCtx.user != null
+        {accountStore.user != null
           ? <Link to="/dashboard" className={styles.openBtn}>{t('common.header.openApp')}</Link>
           : <Link to="/login" className={styles.openBtn}>{t('common.header.login')}</Link>
         }
@@ -45,4 +45,4 @@ const Header: FunctionComponent = () => {
   );
 };
 
-export default Header;
+export default observer(Header);

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { useMutation } from '@apollo/client';
+import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,8 +7,8 @@ import styled from '@emotion/styled';
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import accountStore from 'store/app/account';
 import { SnackbarContext } from 'core/contexts';
-import { RegisterMutation } from 'core/api/mutations';
 
 const Container = styled('main')({
   width: '100%',
@@ -77,15 +77,6 @@ const Register: FunctionComponent = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const snackbarCtx = React.useContext(SnackbarContext);
-  const [registerMutation] = useMutation(RegisterMutation, {
-    onCompleted: () => {
-      snackbarCtx.showSnack({ text: 'Success' }); // TODO lang
-      navigate('/login');
-    },
-    onError: (error) => {
-      snackbarCtx.showSnack({ text: error.message, severity: 'error' });
-    },
-  });
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -94,8 +85,15 @@ const Register: FunctionComponent = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      const { username, email, password } = values;
-      registerMutation({ variables: { username, email, password } }).catch(() => { });
+      accountStore.register(values, {
+        successCallback: () => {
+          snackbarCtx.showSnack({ text: 'Success' }); // TODO lang
+          navigate('/login');
+        },
+        errorCallback: () => {
+          snackbarCtx.showSnack({ text: 'Someting went wrong', severity: 'error' }); // TODO lang
+        },
+      }).catch(() => { });
     },
   });
   return (
@@ -142,4 +140,4 @@ const Register: FunctionComponent = () => {
   );
 };
 
-export default Register;
+export default observer(Register);

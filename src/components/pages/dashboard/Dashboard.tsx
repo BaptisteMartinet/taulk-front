@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { observer } from 'mobx-react-lite';
 import { styled } from '@mui/material';
+import accountStore from 'store/app/account';
 import store from 'store/pages/dashboard';
 import LobbiesBar from './lobbies-bar';
 import ChannelsBar from './channels-bar';
@@ -13,6 +14,11 @@ const Container = styled('main')({
 });
 
 const Dashboard: FunctionComponent = () => {
+  React.useEffect(() => {
+    if (accountStore.loaded && accountStore.user == null) {
+      location.replace('/login');
+    }
+  }, [accountStore.loaded]);
   React.useEffect(() => {
     store.init().catch(() => { });
   }, []);

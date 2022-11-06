@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { useMutation } from '@apollo/client';
+import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import {
   Button as MuiButton,
@@ -12,9 +12,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import PasswordIcon from '@mui/icons-material/Password';
 import { useFormik } from 'formik';
-import { AuthContext, SnackbarContext } from 'core/contexts';
-import { LoginResponse } from 'core/api/types';
-import { LoginMutation } from 'core/api/mutations';
+import { SnackbarContext } from 'core/contexts';
+import accountStore from 'store/app/account';
 
 const Container = styled('main')({
   width: '100%',
@@ -66,18 +65,12 @@ const RegisterLink = styled(Link)({
 
 const Login: FunctionComponent = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const authCtx = React.useContext(AuthContext);
   const snackbarCtx = React.useContext(SnackbarContext);
-  const [loginMutation] = useMutation(LoginMutation, {
-    onCompleted: (data) => {
-      const res: LoginResponse = data.public.account.login;
-      localStorage.setItem('token', res.token);
-      authCtx.login(res.user);
-      navigate('/dashboard');
-    },
-    onError: (error) => { snackbarCtx.showSnack({ text: error.message, severity: 'error' }); },
-  });
+  React.useEffect(() => {
+    if (accountStore.loaded && accountStore.user != null) {
+      location.replace('/dashboard');
+    }
+  }, [accountStore.loaded, accountStore.user]);
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -85,7 +78,11 @@ const Login: FunctionComponent = () => {
     },
     onSubmit: (values) => {
       const { email, password } = values;
-      loginMutation({ variables: { email, password } }).catch(() => { });
+      accountStore.login({ email, password }, {
+        errorCallback: () => {
+          snackbarCtx.showSnack({ text: 'Something went wrong', severity: 'error' }); // TODO lang
+        },
+      }).catch(() => { });
     },
   });
   return (
@@ -134,4 +131,4 @@ const Login: FunctionComponent = () => {
   );
 };
 
-export default Login;
+export default observer(Login);
