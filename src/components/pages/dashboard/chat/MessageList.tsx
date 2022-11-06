@@ -11,6 +11,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
 import generateAcronym from 'lib/string';
+import { stringToColor } from 'lib/colors';
 import store from 'store/pages/dashboard';
 
 const List = styled(MuiList)({
@@ -33,25 +34,29 @@ const MessagesList: FunctionComponent = () => {
   const { t } = useTranslation();
   return (
     <List>
-      {store.currentChannel?.messages.slice().reverse().map(message => (
-        <React.Fragment key={message.id}>
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar>{generateAcronym(message.owner.username)}</Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              sx={{ '& .MuiListItemText-secondary': { color: 'rgba(255, 255, 255, 0.6)' } }}
-              primary={message.owner.username}
-              secondary={message.text}
-            />
-          </ListItem>
-          <li>
-            <Divider role="presentation">
-              <Chip label={datefns.format(message.createdAt, t('misc.date-format'))} sx={{ color: 'white' }} />
-            </Divider>
-          </li>
-        </React.Fragment>
-      ))}
+      {store.currentChannel?.messages.slice().reverse().map(message => {
+        const { owner, text, createdAt } = message;
+        const { username } = owner;
+        return (
+          <React.Fragment key={message.id}>
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar sx={{ bgcolor: stringToColor(username) }}>{generateAcronym(username)}</Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                sx={{ '& .MuiListItemText-secondary': { color: 'rgba(255, 255, 255, 0.6)' } }}
+                primary={username}
+                secondary={text}
+              />
+            </ListItem>
+            <li>
+              <Divider role="presentation">
+                <Chip label={datefns.format(createdAt, t('misc.date-format'))} sx={{ color: 'white' }} />
+              </Divider>
+            </li>
+          </React.Fragment>
+        );
+      })}
     </List>
   );
 };
