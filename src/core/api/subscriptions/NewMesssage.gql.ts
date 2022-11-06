@@ -7,6 +7,9 @@ subscription NewMessage {
     channel {
       id
       title
+      lobby {
+        id
+      }
       createdAt
       updatedAt
     }

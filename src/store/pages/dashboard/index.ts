@@ -1,6 +1,6 @@
 import apolloClient from 'apollo';
 import { observable, action, makeAutoObservable, flow } from 'mobx';
-import { Channel, Lobby } from 'core/api/types';
+import { Channel, Lobby, Message } from 'core/api/types';
 import { GetMyLobbies } from 'core/api/queries';
 import { NewMesssage } from 'core/api/subscriptions';
 
@@ -19,6 +19,7 @@ class DashboardStore {
       setLobbies: action,
       setCurrentLobby: action,
       setCurrentChannel: action,
+      addMessage: action,
       init: flow,
     });
   }
@@ -39,12 +40,17 @@ class DashboardStore {
     this.currentChannel = this.currentLobby?.channels.find((channel) => (channel.id === id)) ?? null;
   }
 
+  addMessage(message: Message): void {
+    const lobby = this.lobbies?.find((_lobby) => message.channel.lobby.id === _lobby.id);
+    const channel = lobby?.channels.find((_channel) => message.channel.id === _channel.id);
+    channel?.messages.push(message);
+  }
+
   async init(): Promise<void> {
     const res: any = await apolloClient.query({ query: GetMyLobbies });
     this.setLobbies(res.data.authenticated.myLobbies);
-    apolloClient.subscribe({ query: NewMesssage }).subscribe((data) => {
-      console.log(data);
-      // TODO add message in store
+    apolloClient.subscribe({ query: NewMesssage }).subscribe((value) => {
+      this.addMessage(value.data.newMessage);
     });
   }
 }
