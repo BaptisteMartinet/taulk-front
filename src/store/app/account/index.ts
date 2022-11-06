@@ -1,5 +1,5 @@
 import { GraphQLErrors } from '@apollo/client/errors';
-import { observable, action, makeAutoObservable, flow } from 'mobx';
+import { observable, action, makeAutoObservable } from 'mobx';
 import apolloClient from 'apollo';
 import {
   User,
@@ -26,7 +26,6 @@ class AccountStore {
       user: observable,
       setLoaded: action,
       setUser: action,
-      init: flow,
     });
   }
 
