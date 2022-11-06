@@ -36,7 +36,7 @@ const Home: FunctionComponent = () => {
                 <h1>{t('pages.home.about-title')}</h1>
               </div>
               <div className={styles.imageContainer}>
-                <img src="assets/undraw_online_messaging_re_qft3.svg" alt="todo" />
+                <img src="assets/undraw_online_messaging_re_qft3.svg" alt="messaging illustration" />
               </div>
             </div>
           </section>
