@@ -1,4 +1,6 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
+import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/material/styles';
 import {
   Button as MuiButton,
@@ -33,6 +35,7 @@ const Button = styled(MuiButton)({
 });
 
 const MessageForm = (): JSX.Element => {
+  const { t } = useTranslation();
   const form = useFormik({
     initialValues: {
       message: '',
@@ -44,10 +47,16 @@ const MessageForm = (): JSX.Element => {
   });
   return (
     <Container onChange={form.handleChange} onSubmit={form.handleSubmit}>
-      <TextArea name="message" id="message" cols={30} placeholder="Send a message within Channel1" value={form.values.message} />
+      <TextArea
+        name="message"
+        id="message"
+        cols={30}
+        placeholder={`${t('pages.dashboard.sendMessage')} ${store.currentChannel?.title ?? 'Unknown'}`}
+        value={form.values.message}
+      />
       <Button type="submit" variant="contained"><SendIcon /></Button>
     </Container>
   );
 };
 
-export default MessageForm;
+export default observer(MessageForm);

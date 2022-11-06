@@ -27,6 +27,9 @@
       "title": "TAULK - Page Not Found",
       "error-title": "404 - Page not found",
       "go-back-link": "⬅️ Go back to homepage"
+    },
+    "dashboard": {
+      "sendMessage": "Send a message within"
     }
   },
   "common": {

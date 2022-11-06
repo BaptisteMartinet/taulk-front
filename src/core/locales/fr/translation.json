@@ -27,6 +27,9 @@
       "title": "TAULK - Page non trouvée",
       "error-title": "404 - Page non trouvée",
       "go-back-link": "⬅️ Revenir à l'accueil"
+    },
+    "dashboard": {
+      "sendMessage": "Envoyer un message sur"
     }
   },
   "common": {
