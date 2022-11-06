@@ -7,7 +7,21 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useFormik } from 'formik';
+import * as yup from 'yup';
 import store from 'store/pages/dashboard';
+
+const validationSchema = yup.object({
+  title: yup
+    .string()
+    .min(1)
+    .max(30)
+    .required(),
+  description: yup
+    .string()
+    .min(1)
+    .max(256)
+    .required(),
+});
 
 export interface CreateLobbyModalProps {
   open: boolean
@@ -23,6 +37,7 @@ const CreateLobbyModal = (props: CreateLobbyModalProps): JSX.Element => {
       description: '',
       isPrivate: false,
     },
+    validationSchema,
     onSubmit: (values) => {
       store.createLobby(values).catch(() => { });
       handleClose();
@@ -40,6 +55,8 @@ const CreateLobbyModal = (props: CreateLobbyModalProps): JSX.Element => {
             label="Title"
             fullWidth
             value={formik.values.title}
+            error={formik.touched.title != null && Boolean(formik.errors.title)}
+            helperText={formik.touched.title != null && formik.errors.title}
           />
           <TextField
             margin="dense"
@@ -47,6 +64,8 @@ const CreateLobbyModal = (props: CreateLobbyModalProps): JSX.Element => {
             label="Description"
             fullWidth
             value={formik.values.description}
+            error={formik.touched.description != null && Boolean(formik.errors.description)}
+            helperText={formik.touched.description != null && formik.errors.description}
           />
         </DialogContent>
         <DialogActions>

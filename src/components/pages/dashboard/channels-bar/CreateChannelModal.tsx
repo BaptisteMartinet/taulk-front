@@ -7,7 +7,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useFormik } from 'formik';
+import * as yup from 'yup';
 import store from 'store/pages/dashboard';
+
+const validationSchema = yup.object({
+  title: yup
+    .string()
+    .min(1)
+    .max(20)
+    .required(),
+});
 
 export interface CreateChannelModalProps {
   open: boolean
@@ -21,6 +30,7 @@ const CreateChannelModal = (props: CreateChannelModalProps): JSX.Element => {
     initialValues: {
       title: '',
     },
+    validationSchema,
     onSubmit: (values) => {
       store.createChannel(values.title).catch(() => { });
       handleClose();
@@ -37,6 +47,8 @@ const CreateChannelModal = (props: CreateChannelModalProps): JSX.Element => {
             id="title"
             label="Title"
             value={formik.values.title}
+            error={formik.touched.title != null && Boolean(formik.errors.title)}
+            helperText={formik.touched.title != null && formik.errors.title}
           />
         </DialogContent>
         <DialogActions>
