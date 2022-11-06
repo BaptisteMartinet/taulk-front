@@ -50,5 +50,8 @@
     "date-hour-format": "MM/dd/yy' at 'H.mm aa",
     "confirm": "Confirm",
     "cancel": "Cancel"
+  },
+  "error": {
+    "generic": "Something went wrong"
   }
 }

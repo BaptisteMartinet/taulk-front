@@ -83,7 +83,7 @@ const Login: FunctionComponent = () => {
       const { email, password } = values;
       accountStore.login({ email, password }, {
         errorCallback: () => {
-          snackbarCtx.showSnack({ text: 'Something went wrong', severity: 'error' }); // TODO lang
+          snackbarCtx.showSnack({ text: t('error.generic'), severity: 'error' });
         },
       }).catch(() => { });
     },
