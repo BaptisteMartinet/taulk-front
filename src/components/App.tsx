@@ -7,6 +7,7 @@ import {
   Login,
   Register,
   Dashboard,
+  JoinLobby,
 } from 'components/pages';
 import './App.scss';
 
@@ -21,6 +22,7 @@ const App: FunctionComponent = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/join-lobby/:id' element={<JoinLobby />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter >

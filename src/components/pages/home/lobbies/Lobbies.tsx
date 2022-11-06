@@ -29,7 +29,7 @@ const Lobbies: FunctionComponent = () => {
       field: 'title',
       headerName: t('pages.home.lobbies.title-header'),
       flex: 1,
-      renderCell: (params) => (<Link to={'/login'} style={{ color: 'blue' }}>{params.value}</Link>), // TODO link
+      renderCell: (params) => (<Link to={`/join-lobby/${params.row.id as string}`} style={{ color: 'blue' }}>{params.value}</Link>),
     },
     { field: 'description', headerName: t('pages.home.lobbies.description-header'), flex: 1 },
     { field: 'createdAt', headerName: t('pages.home.lobbies.createdAt-header'), flex: 0.5 },
