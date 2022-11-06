@@ -25,11 +25,14 @@ const Container = styled('main')({
 });
 
 const FormContainer = styled('div')({
-  width: '600px',
+  width: 'min(600px, 95%)',
   padding: '3em 8em',
   borderRadius: '16px',
   backgroundColor: 'white',
   boxShadow: 'rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px',
+  '@media (max-width: 960px)': {
+    padding: '1em',
+  },
 });
 
 const Form = styled('form')({
