@@ -86,11 +86,8 @@ class DashboardStore {
       if (this.currentLobby == null) return;
       const variables: ChannelCreateInput = { lobbyId: this.currentLobby.id, title, isPrivate: false };
       const res = await apolloClient.mutate({ mutation: CreateChannel, variables });
-      console.log('salut a tous');
       this.addChannel(res.data.authenticated.channel.create);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) { }
   }
 
   async init(): Promise<void> {
