@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 import { styled } from '@mui/material/styles';
 import MuiStack from '@mui/material/Stack';
@@ -37,6 +38,7 @@ const Stack = styled(MuiStack)({
 });
 
 const ChannelsBar: FunctionComponent = () => {
+  const { t } = useTranslation();
   const [createChannelModalState, setCreateChannelModalState] = React.useState(false);
   const closeChannelModal = (): void => {
     setCreateChannelModalState(false);
@@ -65,7 +67,7 @@ const ChannelsBar: FunctionComponent = () => {
             onClick={() => { setCreateChannelModalState(true); }}
             variant="contained"
           >
-            Create Channel
+            {t('pages.dashboard.create-channel')}
           </Button>
         </Stack>
       </Scrollable>

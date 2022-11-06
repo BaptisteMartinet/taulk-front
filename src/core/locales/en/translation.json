@@ -30,7 +30,7 @@
     },
     "dashboard": {
       "sendMessage": "Send a message within",
-      "create-channel": "Create a new Channel",
+      "create-channel": "Create Channel",
       "create-lobby": "Create a new Lobby"
     }
   },
