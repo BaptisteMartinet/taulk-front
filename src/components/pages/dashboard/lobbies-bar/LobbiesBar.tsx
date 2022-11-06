@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import store from 'store/pages/dashboard';
 import LobbyAvatar from './LobbyAvatar';
 import { Scrollable } from 'components/common';
+import CreateLobbyModal from './CreateLobbyModal';
 
 const Container = styled('div')({
   flex: '0 0 80px',
@@ -24,6 +25,10 @@ const Separator = styled('div')({
 });
 
 const LobbiesBar: FunctionComponent = () => {
+  const [createLobbyModalState, setCreateLobbyModalState] = React.useState(false);
+  const closeLobbyModal = (): void => {
+    setCreateLobbyModalState(false);
+  };
   return (
     <Container>
       <Scrollable>
@@ -35,13 +40,14 @@ const LobbiesBar: FunctionComponent = () => {
           {store.lobbies?.map((lobby) => (
             <LobbyAvatar key={lobby.id} lobby={lobby} isCurrentLobby={lobby.id === store.currentLobby?.id} />
           ))}
-          <IconButton onClick={() => { console.info('Create lobby dialog'); }}>
+          <IconButton onClick={() => { setCreateLobbyModalState(true); }}>
             <Avatar sx={{ width: '48px', height: '48px', bgcolor: 'var(--discord3)', color: 'green' }}>
               <AddIcon />
             </Avatar>
           </IconButton>
         </MuiStack>
       </Scrollable>
+      <CreateLobbyModal open={createLobbyModalState} handleClose={closeLobbyModal} />
     </Container>
   );
 };

@@ -1,13 +1,14 @@
 import apolloClient from 'apollo';
-import { observable, action, makeAutoObservable, flow } from 'mobx';
+import { observable, action, makeAutoObservable } from 'mobx';
 import {
   Channel,
   Lobby,
+  LobbyCreateInput,
   Message,
   MessageCreateInput,
 } from 'core/api/types';
 import { GetMyLobbies } from 'core/api/queries';
-import { CreateMessage } from 'core/api/mutations';
+import { CreateLobby, CreateMessage } from 'core/api/mutations';
 import { NewMesssage } from 'core/api/subscriptions';
 
 class DashboardStore {
@@ -26,7 +27,7 @@ class DashboardStore {
       setCurrentLobby: action,
       setCurrentChannel: action,
       addMessage: action,
-      init: flow,
+      addLobby: action,
     });
   }
 
@@ -58,10 +59,18 @@ class DashboardStore {
       channelId: this.currentChannel?.id,
       text: message,
     };
-    apolloClient.mutate({
-      mutation: CreateMessage,
-      variables,
-    }).catch(() => { });
+    apolloClient.mutate({ mutation: CreateMessage, variables }).catch(() => { });
+  }
+
+  addLobby(lobby: Lobby): void {
+    this.lobbies?.push(lobby);
+  }
+
+  async createLobby(variables: LobbyCreateInput): Promise<void> {
+    try {
+      const res = await apolloClient.mutate({ mutation: CreateLobby, variables });
+      this.addLobby(res.data.authenticated.lobby.create);
+    } catch (e) { }
   }
 
   async init(): Promise<void> {
