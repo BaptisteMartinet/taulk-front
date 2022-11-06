@@ -46,7 +46,8 @@
     }
   },
   "misc": {
-    "date-format": "dd/MM/yy' at 'H.mm aa",
+    "date-format": "MM/dd/yy",
+    "date-hour-format": "MM/dd/yy' at 'H.mm aa",
     "confirm": "Confirm",
     "cancel": "Cancel"
   }

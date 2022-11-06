@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import * as datefns from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
@@ -22,7 +23,7 @@ const Lobbies: FunctionComponent = () => {
   const lobbies: LobbyRestricted[] = data.public.lobbies;
   const rows: GridRowsProp = lobbies.map((lobby) => {
     const { id, title, description, createdAt } = lobby;
-    return { id, title, description, createdAt: new Date(createdAt).toDateString() };
+    return { id, title, description, createdAt: datefns.format(createdAt, t('misc.date-format')) };
   });
   const columns: GridColDef[] = [
     {

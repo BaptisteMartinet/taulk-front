@@ -51,7 +51,7 @@ const MessagesList: FunctionComponent = () => {
             </ListItem>
             <li>
               <Divider role="presentation">
-                <Chip label={datefns.format(createdAt, t('misc.date-format'))} sx={{ color: 'white' }} />
+                <Chip label={datefns.format(createdAt, t('misc.date-hour-format'))} sx={{ color: 'white' }} />
               </Divider>
             </li>
           </React.Fragment>
