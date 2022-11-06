@@ -39,21 +39,24 @@ class AccountStore {
   }
 
   async login(variables: AccountLoginInput, callbacks?: CallbacksOpts): Promise<void> {
-    const res = await apolloClient.mutate({ mutation: LoginMutation, variables });
-    if (res.errors != null) {
-      callbacks?.errorCallback?.(res.errors);
+    try {
+      const res = await apolloClient.mutate({ mutation: LoginMutation, variables });
+      const data: LoginResponse = res.data.public.account.login;
+      localStorage.setItem('token', data.token);
+      this.setUser(data.user);
+    } catch (e) {
+      callbacks?.errorCallback?.([]);
       return;
     }
-    const data: LoginResponse = res.data.public.account.login;
-    localStorage.setItem('token', data.token);
-    this.setUser(data.user);
     callbacks?.successCallback?.();
   }
 
   async register(variables: AccountRegisterInput, callbacks?: CallbacksOpts): Promise<void> {
-    const res = await apolloClient.mutate({ mutation: RegisterMutation, variables });
-    if (res.errors != null) {
-      callbacks?.errorCallback?.(res.errors);
+    try {
+      await apolloClient.mutate({ mutation: RegisterMutation, variables });
+    } catch (e) {
+      callbacks?.errorCallback?.([]);
+      return;
     }
     callbacks?.successCallback?.();
   }
