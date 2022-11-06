@@ -38,7 +38,7 @@ const ChannelsBar: FunctionComponent = () => {
   return (
     <Container>
       <LobbyTitleContainer>
-        <LobbyTitle>Lobby title</LobbyTitle>
+        <LobbyTitle>{store.currentLobby?.title ?? 'Lobby'}</LobbyTitle>
       </LobbyTitleContainer>
       <Scrollable>
         <Stack direction="column" spacing={1}>
