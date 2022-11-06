@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -15,6 +16,7 @@ export interface CreateLobbyModalProps {
 
 const CreateLobbyModal = (props: CreateLobbyModalProps): JSX.Element => {
   const { open, handleClose } = props;
+  const { t } = useTranslation();
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -29,7 +31,7 @@ const CreateLobbyModal = (props: CreateLobbyModalProps): JSX.Element => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <form onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
-        <DialogTitle>Create a new Lobby</DialogTitle>
+        <DialogTitle>{t('pages.dashboard.create-lobby')}</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -48,8 +50,8 @@ const CreateLobbyModal = (props: CreateLobbyModalProps): JSX.Element => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Send</Button>
+          <Button onClick={handleClose}>{t('misc.cancel')}</Button>
+          <Button type="submit">{t('misc.confirm')}</Button>
         </DialogActions>
       </form>
     </Dialog>

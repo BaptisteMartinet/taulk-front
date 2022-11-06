@@ -29,7 +29,9 @@
       "go-back-link": "⬅️ Go back to homepage"
     },
     "dashboard": {
-      "sendMessage": "Send a message within"
+      "sendMessage": "Send a message within",
+      "create-channel": "Create a new Channel",
+      "create-lobby": "Create a new Lobby"
     }
   },
   "common": {
@@ -44,6 +46,8 @@
     }
   },
   "misc": {
-    "date-format": "dd/MM/yy' at 'H.mm aa"
+    "date-format": "dd/MM/yy' at 'H.mm aa",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   }
 }

@@ -10,7 +10,7 @@ import { GetLobbies } from 'core/api/queries';
 
 const Lobbies: FunctionComponent = () => {
   const { t } = useTranslation();
-  const [pageSize, setPageSize] = React.useState(5);
+  const [pageSize, setPageSize] = React.useState(10);
   const { loading, error, data } = useQuery(GetLobbies);
   if (loading || error != null) {
     return (
@@ -41,7 +41,7 @@ const Lobbies: FunctionComponent = () => {
       autoHeight
       pageSize={pageSize}
       onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-      rowsPerPageOptions={[5, 10]}
+      rowsPerPageOptions={[10, 20, 30, 50, 100]}
       isRowSelectable={() => false}
     />
   );

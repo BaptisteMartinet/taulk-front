@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -15,6 +16,7 @@ export interface CreateChannelModalProps {
 
 const CreateChannelModal = (props: CreateChannelModalProps): JSX.Element => {
   const { open, handleClose } = props;
+  const { t } = useTranslation();
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -27,7 +29,7 @@ const CreateChannelModal = (props: CreateChannelModalProps): JSX.Element => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <form onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
-        <DialogTitle>Create a new Channel</DialogTitle>
+        <DialogTitle>{t('pages.dashboard.create-channel')}</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -38,8 +40,8 @@ const CreateChannelModal = (props: CreateChannelModalProps): JSX.Element => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Send</Button>
+          <Button onClick={handleClose}>{t('misc.cancel')}</Button>
+          <Button type="submit">{t('misc.confirm')}</Button>
         </DialogActions>
       </form>
     </Dialog>

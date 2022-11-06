@@ -29,7 +29,9 @@
       "go-back-link": "⬅️ Revenir à l'accueil"
     },
     "dashboard": {
-      "sendMessage": "Envoyer un message sur"
+      "sendMessage": "Envoyer un message sur",
+      "create-channel": "Créer un Channel",
+      "create-lobby": "Créer un Serveur"
     }
   },
   "common": {
@@ -44,6 +46,8 @@
     }
   },
   "misc": {
-    "date-format": "dd/MM/yy' à 'HH:mm"
+    "date-format": "dd/MM/yy' à 'HH:mm",
+    "confirm": "Confirmer",
+    "cancel": "Annuler"
   }
 }
