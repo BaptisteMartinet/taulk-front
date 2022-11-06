@@ -7,5 +7,6 @@ export interface User {
 }
 
 export interface UserRestricted {
+  id: string
   username: string
 }

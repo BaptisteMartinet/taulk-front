@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { observer } from 'mobx-react-lite';
 import { styled } from '@mui/material/styles';
 import MuiList from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -7,6 +8,8 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
+import generateAcronym from 'lib/string';
+import store from 'store/pages/dashboard';
 
 const List = styled(MuiList)({
   flex: 1,
@@ -19,39 +22,27 @@ const List = styled(MuiList)({
 const MessagesList: FunctionComponent = () => {
   return (
     <List>
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar>B</Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          sx={{ '& .MuiListItemText-secondary': { color: 'rgba(255, 255, 255, 0.6)' } }}
-          primary="Baptiste#54613"
-          secondary="Message 2"
-        />
-      </ListItem>
-      <li>
-        <Divider role="presentation">
-          <Chip label="Wed. 12 Oct. 3:15pm" sx={{ color: 'white' }} />
-        </Divider>
-      </li>
-
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar>B</Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          sx={{ '& .MuiListItemText-secondary': { color: 'rgba(255, 255, 255, 0.6)' } }}
-          primary="Baptiste#54613"
-          secondary="Salut à tous les amis"
-        />
-      </ListItem>
-      <li>
-        <Divider>
-          <Chip label="Wed. 12 Oct. 3:15pm" sx={{ color: 'white' }} />
-        </Divider>
-      </li>
+      {store.currentChannel?.messages.map(message => (
+        <React.Fragment key={message.id}>
+          <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+              <Avatar>{generateAcronym(message.owner.username)}</Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              sx={{ '& .MuiListItemText-secondary': { color: 'rgba(255, 255, 255, 0.6)' } }}
+              primary={message.owner.username}
+              secondary={message.text}
+            />
+          </ListItem>
+          <li>
+            <Divider role="presentation">
+              <Chip label={new Date(message.createdAt).toDateString()} sx={{ color: 'white' }} />
+            </Divider>
+          </li>
+        </React.Fragment>
+      ))}
     </List>
   );
 };
 
-export default MessagesList;
+export default observer(MessagesList);

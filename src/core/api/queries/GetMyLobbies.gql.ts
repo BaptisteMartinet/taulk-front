@@ -20,6 +20,10 @@ query GetMyLobbies {
         }
         messages {
           id
+          owner {
+            id
+            username
+          }
           text
           createdAt
         }

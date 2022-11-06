@@ -14,6 +14,7 @@ subscription NewMessage {
       updatedAt
     }
     owner {
+      id
       username
     }
     text
