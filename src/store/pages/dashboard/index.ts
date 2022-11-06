@@ -1,7 +1,13 @@
 import apolloClient from 'apollo';
 import { observable, action, makeAutoObservable, flow } from 'mobx';
-import { Channel, Lobby, Message } from 'core/api/types';
+import {
+  Channel,
+  Lobby,
+  Message,
+  MessageCreateInput,
+} from 'core/api/types';
 import { GetMyLobbies } from 'core/api/queries';
+import { CreateMessage } from 'core/api/mutations';
 import { NewMesssage } from 'core/api/subscriptions';
 
 class DashboardStore {
@@ -44,6 +50,18 @@ class DashboardStore {
     const lobby = this.lobbies?.find((_lobby) => message.channel.lobby.id === _lobby.id);
     const channel = lobby?.channels.find((_channel) => message.channel.id === _channel.id);
     channel?.messages.push(message);
+  }
+
+  createMessage(message: string): void {
+    if (this.currentChannel == null) return;
+    const variables: MessageCreateInput = {
+      channelId: this.currentChannel?.id,
+      text: message,
+    };
+    apolloClient.mutate({
+      mutation: CreateMessage,
+      variables,
+    }).catch(() => { });
   }
 
   async init(): Promise<void> {

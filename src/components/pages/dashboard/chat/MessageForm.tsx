@@ -6,6 +6,7 @@ import {
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useFormik } from 'formik';
+import store from 'store/pages/dashboard';
 
 const Container = styled('form')({
   display: 'flex',
@@ -35,8 +36,8 @@ const MessageForm = (): JSX.Element => {
     initialValues: {
       message: '',
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: ({ message }) => {
+      store.createMessage(message);
       form.resetForm();
     },
   });
