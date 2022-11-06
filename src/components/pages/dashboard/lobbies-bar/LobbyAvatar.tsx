@@ -12,7 +12,7 @@ const Avatar = styled(MuiAvatar)({
   height: '48px',
   transition: '500ms',
   '&:hover': {
-    backgroundColor: 'rgba(0, 0, 255, .5)',
+    backgroundColor: 'blue',
   },
 });
 
@@ -24,7 +24,7 @@ export interface LobbyAvatarProps {
 const LobbyAvatar: FunctionComponent<LobbyAvatarProps> = (props) => {
   const { lobby, isCurrentLobby } = props;
   const lobbyAcronym = generateAcronym(lobby.title);
-  const bgcolor = isCurrentLobby ? 'blue !important' : 'var(--discord3)';
+  const bgcolor = isCurrentLobby ? 'blue' : 'var(--discord3)';
   return (
     <IconButton onClick={() => { store.setCurrentLobby(lobby.id); }}>
       <Badge badgeContent={0} color="primary" overlap="circular">
