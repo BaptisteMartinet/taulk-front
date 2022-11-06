@@ -90,11 +90,11 @@ const Register: FunctionComponent = () => {
     onSubmit: (values) => {
       accountStore.register(values, {
         successCallback: () => {
-          snackbarCtx.showSnack({ text: 'Success' }); // TODO lang
+          snackbarCtx.showSnack({ text: t('misc.success') });
           navigate('/login');
         },
         errorCallback: () => {
-          snackbarCtx.showSnack({ text: 'Someting went wrong', severity: 'error' }); // TODO lang
+          snackbarCtx.showSnack({ text: t('error.generic'), severity: 'error' });
         },
       }).catch(() => { });
     },

@@ -49,7 +49,8 @@
     "date-format": "dd/MM/yy",
     "date-hour-format": "dd/MM/yy' à 'HH:mm",
     "confirm": "Confirmer",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "success": "Succès"
   },
   "error": {
     "generic": "Un problème est survenu"
