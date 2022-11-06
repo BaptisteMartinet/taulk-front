@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import * as datefns from 'date-fns';
 import { styled } from '@mui/material/styles';
 import MuiList from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+import MuiListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -20,6 +20,13 @@ const List = styled(MuiList)({
   flexDirection: 'column-reverse',
   color: 'white',
   overflowY: 'auto',
+});
+
+const ListItem = styled(MuiListItem)({
+  borderRadius: '16px',
+  '&:hover': {
+    backgroundColor: 'rgba(255, 255, 255, .1)',
+  },
 });
 
 const MessagesList: FunctionComponent = () => {
