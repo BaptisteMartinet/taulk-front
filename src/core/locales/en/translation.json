@@ -39,5 +39,8 @@
       "openApp": "Open App",
       "login": "Login"
     }
+  },
+  "misc": {
+    "date-format": "dd/MM/yy' at 'H.mm aa"
   }
 }

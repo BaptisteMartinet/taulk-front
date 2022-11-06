@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { observer } from 'mobx-react-lite';
+import { useTranslation } from 'react-i18next';
+import * as datefns from 'date-fns';
 import { styled } from '@mui/material/styles';
 import MuiList from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -21,29 +23,28 @@ const List = styled(MuiList)({
 });
 
 const MessagesList: FunctionComponent = () => {
+  const { t } = useTranslation();
   return (
     <List>
-      <div>
-        {store.currentChannel?.messages.map(message => (
-          <React.Fragment key={message.id}>
-            <li>
-              <Divider role="presentation">
-                <Chip label={new Date(message.createdAt).toDateString()} sx={{ color: 'white' }} />
-              </Divider>
-            </li>
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar>{generateAcronym(message.owner.username)}</Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                sx={{ '& .MuiListItemText-secondary': { color: 'rgba(255, 255, 255, 0.6)' } }}
-                primary={message.owner.username}
-                secondary={message.text}
-              />
-            </ListItem>
-          </React.Fragment>
-        ))}
-      </div>
+      {store.currentChannel?.messages.slice().reverse().map(message => (
+        <React.Fragment key={message.id}>
+          <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+              <Avatar>{generateAcronym(message.owner.username)}</Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              sx={{ '& .MuiListItemText-secondary': { color: 'rgba(255, 255, 255, 0.6)' } }}
+              primary={message.owner.username}
+              secondary={message.text}
+            />
+          </ListItem>
+          <li>
+            <Divider role="presentation">
+              <Chip label={datefns.format(message.createdAt, t('misc.date-format'))} sx={{ color: 'white' }} />
+            </Divider>
+          </li>
+        </React.Fragment>
+      ))}
     </List>
   );
 };

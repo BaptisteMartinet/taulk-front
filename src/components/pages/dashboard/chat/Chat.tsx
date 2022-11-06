@@ -5,7 +5,7 @@ import MessageForm from './MessageForm';
 
 const Container = styled('div')({
   flex: 1,
-  padding: '1em',
+  padding: '1em 0 1em 1em',
   display: 'flex',
   flexDirection: 'column-reverse',
   backgroundColor: 'var(--discord3)',
