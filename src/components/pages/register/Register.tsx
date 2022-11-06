@@ -120,6 +120,7 @@ const Register: FunctionComponent = () => {
             <StyledTextField
               name="email"
               label="Email"
+              type="email"
               variant="outlined"
               value={formik.values.email}
               error={formik.touched.email != null && Boolean(formik.errors.email)}

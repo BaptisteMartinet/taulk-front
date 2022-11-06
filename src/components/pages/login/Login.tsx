@@ -102,6 +102,7 @@ const Login: FunctionComponent = () => {
               label="Email"
               variant="outlined"
               name="email"
+              type="email"
               value={formik.values.email}
               InputProps={{
                 endAdornment: (
