@@ -15,6 +15,7 @@ const Container = styled('form')({
 
 const TextArea = styled(TextareaAutosize)({
   flex: 1,
+  maxHeight: '15em',
   padding: '1em',
   fontSize: 'var(--fs-400)',
   color: 'white',

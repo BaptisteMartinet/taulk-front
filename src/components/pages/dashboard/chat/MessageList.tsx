@@ -13,6 +13,7 @@ import store from 'store/pages/dashboard';
 
 const List = styled(MuiList)({
   flex: 1,
+  paddingBlock: '1em',
   display: 'flex',
   flexDirection: 'column-reverse',
   color: 'white',
@@ -22,25 +23,27 @@ const List = styled(MuiList)({
 const MessagesList: FunctionComponent = () => {
   return (
     <List>
-      {store.currentChannel?.messages.map(message => (
-        <React.Fragment key={message.id}>
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar>{generateAcronym(message.owner.username)}</Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              sx={{ '& .MuiListItemText-secondary': { color: 'rgba(255, 255, 255, 0.6)' } }}
-              primary={message.owner.username}
-              secondary={message.text}
-            />
-          </ListItem>
-          <li>
-            <Divider role="presentation">
-              <Chip label={new Date(message.createdAt).toDateString()} sx={{ color: 'white' }} />
-            </Divider>
-          </li>
-        </React.Fragment>
-      ))}
+      <div>
+        {store.currentChannel?.messages.map(message => (
+          <React.Fragment key={message.id}>
+            <li>
+              <Divider role="presentation">
+                <Chip label={new Date(message.createdAt).toDateString()} sx={{ color: 'white' }} />
+              </Divider>
+            </li>
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar>{generateAcronym(message.owner.username)}</Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                sx={{ '& .MuiListItemText-secondary': { color: 'rgba(255, 255, 255, 0.6)' } }}
+                primary={message.owner.username}
+                secondary={message.text}
+              />
+            </ListItem>
+          </React.Fragment>
+        ))}
+      </div>
     </List>
   );
 };
