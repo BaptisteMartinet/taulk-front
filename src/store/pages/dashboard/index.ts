@@ -2,13 +2,14 @@ import apolloClient from 'apollo';
 import { observable, action, makeAutoObservable } from 'mobx';
 import {
   Channel,
+  ChannelCreateInput,
   Lobby,
   LobbyCreateInput,
   Message,
   MessageCreateInput,
 } from 'core/api/types';
 import { GetMyLobbies } from 'core/api/queries';
-import { CreateLobby, CreateMessage } from 'core/api/mutations';
+import { CreateChannel, CreateLobby, CreateMessage } from 'core/api/mutations';
 import { NewMesssage } from 'core/api/subscriptions';
 
 class DashboardStore {
@@ -28,6 +29,7 @@ class DashboardStore {
       setCurrentChannel: action,
       addMessage: action,
       addLobby: action,
+      addChannel: action,
     });
   }
 
@@ -71,6 +73,24 @@ class DashboardStore {
       const res = await apolloClient.mutate({ mutation: CreateLobby, variables });
       this.addLobby(res.data.authenticated.lobby.create);
     } catch (e) { }
+  }
+
+  addChannel(channel: Channel): void {
+    const lobby = this.lobbies?.find((elem) => elem.id === channel.lobby.id);
+    if (lobby == null) return;
+    lobby.channels.push(channel);
+  }
+
+  async createChannel(title: string): Promise<void> {
+    try {
+      if (this.currentLobby == null) return;
+      const variables: ChannelCreateInput = { lobbyId: this.currentLobby.id, title, isPrivate: false };
+      const res = await apolloClient.mutate({ mutation: CreateChannel, variables });
+      console.log('salut a tous');
+      this.addChannel(res.data.authenticated.channel.create);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async init(): Promise<void> {

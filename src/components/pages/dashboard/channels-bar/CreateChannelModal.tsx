@@ -8,43 +8,33 @@ import TextField from '@mui/material/TextField';
 import { useFormik } from 'formik';
 import store from 'store/pages/dashboard';
 
-export interface CreateLobbyModalProps {
+export interface CreateChannelModalProps {
   open: boolean
   handleClose: () => void
 }
 
-const CreateLobbyModal = (props: CreateLobbyModalProps): JSX.Element => {
+const CreateChannelModal = (props: CreateChannelModalProps): JSX.Element => {
   const { open, handleClose } = props;
   const formik = useFormik({
     initialValues: {
       title: '',
-      description: '',
-      isPrivate: false,
     },
     onSubmit: (values) => {
-      store.createLobby(values).catch(() => { });
+      store.createChannel(values.title).catch(() => { });
       handleClose();
     },
   });
   return (
     <Dialog open={open} onClose={handleClose}>
       <form onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
-        <DialogTitle>Create a new Lobby</DialogTitle>
+        <DialogTitle>Create a new Channel</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
             id="title"
             label="Title"
-            fullWidth
             value={formik.values.title}
-          />
-          <TextField
-            margin="dense"
-            id="description"
-            label="Description"
-            fullWidth
-            value={formik.values.description}
           />
         </DialogContent>
         <DialogActions>
@@ -56,4 +46,4 @@ const CreateLobbyModal = (props: CreateLobbyModalProps): JSX.Element => {
   );
 };
 
-export default CreateLobbyModal;
+export default CreateChannelModal;

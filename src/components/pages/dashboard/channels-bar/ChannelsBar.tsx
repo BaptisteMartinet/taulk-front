@@ -3,8 +3,10 @@ import { observer } from 'mobx-react-lite';
 import { styled } from '@mui/material/styles';
 import MuiStack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 import store from 'store/pages/dashboard';
 import { Scrollable } from 'components/common';
+import CreateChannelModal from './CreateChannelModal';
 
 const Container = styled('div')({
   position: 'relative',
@@ -35,6 +37,10 @@ const Stack = styled(MuiStack)({
 });
 
 const ChannelsBar: FunctionComponent = () => {
+  const [createChannelModalState, setCreateChannelModalState] = React.useState(false);
+  const closeChannelModal = (): void => {
+    setCreateChannelModalState(false);
+  };
   return (
     <Container>
       <LobbyTitleContainer>
@@ -54,8 +60,16 @@ const ChannelsBar: FunctionComponent = () => {
               </Button>
             );
           })}
+          <Divider />
+          <Button
+            onClick={() => { setCreateChannelModalState(true); }}
+            variant="contained"
+          >
+            Create Channel
+          </Button>
         </Stack>
       </Scrollable>
+      <CreateChannelModal open={createChannelModalState} handleClose={closeChannelModal} />
     </Container>
   );
 };

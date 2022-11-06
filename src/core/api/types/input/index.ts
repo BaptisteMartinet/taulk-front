@@ -10,3 +10,9 @@ export interface LobbyCreateInput {
   description: string
   isPrivate: boolean
 }
+
+export interface ChannelCreateInput {
+  lobbyId: string
+  title: string
+  isPrivate: boolean
+}
